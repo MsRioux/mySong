@@ -1,13 +1,14 @@
 public class Song
 {
     //1) Instance Variables
-    String title;
-    String artist; // can also be composer
-    boolean hasLyrics;
-    int length; //in seconds
-    double fileSize; //in megaBytes
+    private String title;
+    private String artist; // can also be composer
+    private boolean hasLyrics;
+    private int length; //in seconds
+    private double fileSize; //in megaBytes
 
     //2) Constructors
+    //Overloaded constructors (methods) have early binding
     public Song()
     {
         title = null;
@@ -32,7 +33,7 @@ public class Song
         title = newTitle;
         artist = newArtist;
         hasLyrics = newHasLyrics;
-        length = newLength;
+        length = checkLength(newLength);
         fileSize = newFileSize;
 
     }//end multi-arg constructor
@@ -70,7 +71,12 @@ public class Song
         hasLyrics = newHasLyrics;
     }// end hasLyrics setter
 
-
+    //Pre-Condition: the object exists
+    //Post-Condition: length == newLength validated to (0,20)
+    public void setLength(int newLength)
+    {
+        length = checkLength(newLength);
+    }//end setLength
     //6 Brain Methods
     public String toMinSec()
     {
@@ -78,6 +84,26 @@ public class Song
         int seconds = length % 60;
        return minutes + " min " + seconds + " sec";
     }//end brain method to convert length
+
+    /*
+     CheckLength is a helper method.  It is private because
+     it "helps" the other public methods by validating entry
+     This is an example of method decomposition - each method does
+     just one thing.
+     */
+    private int checkLength(int newLength)
+    {
+        int tempLength = newLength;
+        if (tempLength < 0)
+        {
+            tempLength = 0;
+        }//end if
+        else if (tempLength >1200)
+        {
+            tempLength = 1200;
+        }//end else if
+        return tempLength;
+    }//end length validation method checkLength
 
     //3. toString  a must have for every great object class
     public String toString()

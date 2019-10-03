@@ -9,6 +9,13 @@ public class SongDriver
         Song overture = new Song("1812 Overture", "Petyr Ilych Tchaicovsky", false, 1093, 11.11);
         Song happySong = new Song("The Happy Song","Moi", true);
 
+        //4 Checking other methods and properties
+        deadLochs.setLength(-5);
+        System.out.println(deadLochs);
+//        fireworks.title = "Happy Song";
+//        System.out.println(fireworks);
+
+/*
         //3 Testing getters
         System.out.println(fireworks.getTitle());
         System.out.println(deadLochs.getArtist());
@@ -28,6 +35,9 @@ public class SongDriver
 //        System.out.println();
 //        System.out.println(deadLochs);
 //        System.out.println("\n" + overture);
+
+
+ */
     }//end main method
 
 }//end class SongDriver.  This is where all the fun stuff happens.
