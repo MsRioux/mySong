@@ -1,4 +1,4 @@
-public class Song
+public class Song implements Comparable<Song>
 {
     //1) Instance Variables
     private String title;
@@ -6,6 +6,7 @@ public class Song
     private boolean hasLyrics;
     private int length; //in seconds
     private double fileSize; //in megaBytes
+    private static int count = 0; //number of songs in my playlist
 
     //2) Constructors
     //Overloaded constructors (methods) have early binding
@@ -16,6 +17,7 @@ public class Song
         hasLyrics = false;
         length = 0;
         fileSize = 0.0;
+        count++;
     }// end zero-arg or default constructor
 
     public Song(String newTitle, String newArtist, boolean newHasLyrics)
@@ -25,21 +27,28 @@ public class Song
         hasLyrics = newHasLyrics;
         length = 0;
         fileSize = 0.0;
+        count++;
     }//end three-arg constructor
 
 
-    public Song(String newTitle, String newArtist, boolean newHasLyrics, int newLength, double newFileSize)
+    public Song(String title, String artist, boolean hasLyrics, int length, double fileSize)
     {
-        title = newTitle;
-        artist = newArtist;
-        hasLyrics = newHasLyrics;
-        length = checkLength(newLength);
-        fileSize = newFileSize;
+        this.title = title;
+        this.artist = artist;
+        this.hasLyrics = hasLyrics;
+        this.length = checkLength(length);
+        this.fileSize = fileSize;
+        count++;
 
     }//end multi-arg constructor
 
 
     //4 Getters
+    public static int getCount()
+    {
+        return count;
+    }//end method getCount
+
     public String getTitle()
     {
         return title;
@@ -78,6 +87,23 @@ public class Song
         length = checkLength(newLength);
     }//end setLength
     //6 Brain Methods
+
+    public int compareTo(Song someSong)
+    {
+        if (this.length < someSong.length)
+        {
+            return -1;
+        }
+        else if (this.length == someSong.length)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+
+    }//end compareTo implemented from interface Comparable
     public String toMinSec()
     {
         int minutes = length / 60;
